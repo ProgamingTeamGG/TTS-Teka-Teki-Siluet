@@ -2,17 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuizDataScriptable : MonoBehaviour
+[CreateAssetMenu(fileName = "QuestionsData", menuName = "QuestionsData", order = 1)]
+public class QuizDataScriptable : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public List<QuestionData> questions;
 }
