@@ -133,10 +133,10 @@ public class TTSManager : MonoBehaviour
         Array.Clear(wordsArray, 0, wordsArray.Length);
 
         //add the correct char to the wordsArray
-        for (int i = 0; i < _answerWord1.Length; i++)
-        {
-            wordsArray[i] = char.ToUpper(_answerWord1[i]);
-        }
+       // for (int i = 0; i < _answerWord1.Length; i++)
+       // {
+         //   wordsArray[i] = char.ToUpper(_answerWord1[i]);
+        //}
 
         //add the dummy char to wordsArray
         for (int j = _answerWord1.Length; j < wordsArray.Length; j++)
