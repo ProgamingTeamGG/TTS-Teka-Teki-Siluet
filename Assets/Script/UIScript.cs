@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
 public class UIScript : MonoBehaviour
 {
+   
+      public void MainMenu()
+   {
+       SceneManager.LoadScene(0);
+   }
    public void play ()
    {
        SceneManager.LoadScene(1);
@@ -48,6 +55,7 @@ public class UIScript : MonoBehaviour
    {
        SceneManager.LoadScene(11);
    }
+     
 
 
    public void Quit()

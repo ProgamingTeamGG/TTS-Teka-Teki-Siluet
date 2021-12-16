@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
   public static bool isGamePaused =false;
@@ -30,4 +30,15 @@ public class Pause : MonoBehaviour
         Time.timeScale=0f;
         isGamePaused = true;
     }
+    public void MainMenu ()
+   {
+       SceneManager.LoadScene(1);
+       Time.timeScale=1f;
+   }
+
+   public void restart()
+   {
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale=1f;
+   }
 }
