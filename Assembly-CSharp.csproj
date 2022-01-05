@@ -86,15 +86,15 @@
      <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
-     <Compile Include="Assets\Script\AudioScript.cs" />
      <Compile Include="Assets\Script\DataHuruf.cs" />
      <Compile Include="Assets\Script\DataHurufPilihan.cs" />
      <Compile Include="Assets\Script\DontDestroyAudio.cs" />
+     <Compile Include="Assets\Script\GameManager.cs" />
      <Compile Include="Assets\Script\OnOffUI.cs" />
-     <Compile Include="Assets\Script\Pause.cs" />
      <Compile Include="Assets\Script\QuizDataScriptable.cs" />
      <Compile Include="Assets\Script\ShuffleList.cs" />
      <Compile Include="Assets\Script\SoundManager.cs" />
+     <Compile Include="Assets\Script\SounEfek.cs" />
      <Compile Include="Assets\Script\TTSManager.cs" />
      <Compile Include="Assets\Script\UIScript.cs" />
      <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

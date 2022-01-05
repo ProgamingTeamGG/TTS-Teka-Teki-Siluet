@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
 
+  
     public Slider volumeMusic;
     public GameObject ObjectMusic;
 
@@ -13,6 +15,9 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+
+
         ObjectMusic = GameObject.FindWithTag("GameMusic");
         AudioSource = ObjectMusic.GetComponent<AudioSource>();
         if (!PlayerPrefs.HasKey("GameMusic"))
@@ -31,12 +36,10 @@ public class SoundManager : MonoBehaviour
     {
         AudioSource.volume = volumeMusic.value;
         Save();
+
     }
 
-    private void OnMouseDown()
-    {
-        
-    }
+
     private void Load()
     {
         volumeMusic.value = PlayerPrefs.GetFloat("GameMusic");
