@@ -1,21 +1,19 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TTSManager : MonoBehaviour
 {
     public static TTSManager instance {get; set;}
 
     public QuizDataScriptable q;
-    public DataHuruf dataHuruf;
+    public DataKotakHuruf dataHuruf;
     public Text questionText;
     public Image questionImage;
-    private GameStatus gameStatus = GameStatus.Playing;
+    public GameStatus gameStatus = GameStatus.Playing;
     public GameObject kotak;
     public GameObject pilihan;
     public Transform wadahTTS;
@@ -24,11 +22,12 @@ public class TTSManager : MonoBehaviour
     public List<GameObject> pilihanList;
     public Text TextTimer;
     public float Waktu; 
-    private List<int> selectedWordsIndex;
-    private char[] wordsArray = new char[20];
+
     float s;
-    public string _answerWord1;
-    public string _answerWord2;
+    private int currentAnswerIndex = 0;
+
+    public char[] wordsArray = new char[20];               //array which store char of each options
+
     private void Awake()
     {
         instance = this;
@@ -38,7 +37,6 @@ public class TTSManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectedWordsIndex = new List<int>(); 
         SetQuestion();
         MakeGridBoard();
     }
@@ -57,6 +55,7 @@ public class TTSManager : MonoBehaviour
 
     public void MakeGridBoard()
     {
+        // Spawn Grid
         kotakList = new List<GameObject>();
         for(int row = 0; row < q.height; row++ )
         {
@@ -68,10 +67,54 @@ public class TTSManager : MonoBehaviour
                 kotakList.Add(_kotak);
                 _kotak.transform.localScale = new Vector3(q.scaleKotak,q.scaleKotak,q.scaleKotak);
                 _kotak.name = col + "," + row;
-                _kotak.GetComponent<DataHuruf>().id = new Vector2Int(col,row);
+                _kotak.GetComponent<DataKotakHuruf>().id = new Vector2Int(col,row);
             }
         }
 
+        // Membuat Map TTS
+        List<QuestionData> soalDiKotak = q.Soal;      
+        for(int i = 0; i < soalDiKotak.Count; i ++)
+        {
+            string jawaban = q.Soal[i].jawaban;
+            List<char> _soal = new List<char> (jawaban.ToCharArray());
+            List<Vector2Int> posHuruf = soalDiKotak[i].posHuruf;
+            for(int j = 0; j < kotakList.Count; j++)
+            {
+                for(int k = 0; k<posHuruf.Count; k++)
+                {
+                    if(kotakList[j].GetComponent<DataKotakHuruf>().id == posHuruf[k])
+                    {
+                        if(q.Soal[i].orientasi == 0)
+                        {
+                            kotakList[j].GetComponent<DataKotakHuruf>().rootSoal1 = q.Soal[i].ID + 1;
+                            kotakList[j].GetComponent<DataKotakHuruf>().answerWord0 = q.Soal[i].jawaban;
+                            kotakList[j].GetComponent<DataKotakHuruf>().isHorizontal = true;
+                        }
+                        else
+                        {
+                            kotakList[j].GetComponent<DataKotakHuruf>().rootSoal2 = q.Soal[i].ID + 1;
+                            kotakList[j].GetComponent<DataKotakHuruf>().answerWord1 = q.Soal[i].jawaban;
+                            kotakList[j].GetComponent<DataKotakHuruf>().isHorizontal = false;
+
+                        }
+                        kotakList[j].GetComponent<DataKotakHuruf>().isUsed = true;
+
+                        kotakList[j].GetComponent<DataKotakHuruf>().hurufJawaban = _soal[k];
+                    }
+                }          
+            }
+        }
+
+        //Disable GameObject Grid
+        for(int i = 0; i < kotakList.Count; i++)
+        {
+            if(kotakList[i].GetComponent<DataKotakHuruf>().isUsed == false)
+            {
+                kotakList[i].SetActive(false);
+            }
+        }              
+
+        // Spawn Option Jawaban
         pilihanList = new List<GameObject>();
         for(int row = 0; row < 2; row++ )
         {
@@ -82,70 +125,40 @@ public class TTSManager : MonoBehaviour
                 _pilihan.transform.parent = wadahPilihan.transform;
                 pilihanList.Add(_pilihan);
                 _pilihan.transform.localScale = new Vector3(0.75f,0.75f,0.75f);
-                _pilihan.name = "Pilihan di " + col + "," + row;
-            }
-        }
+                _pilihan.name = "Pilihan di " + col + "," + row;        
 
-        List<QuestionData> soalDiKotak = q.Soal;
-        for(int i = 0; i < soalDiKotak.Count; i ++)
-        {
-            List<Vector2Int> posHuruf = soalDiKotak[i].posHuruf;
-            for(int j = 0; j < kotakList.Count; j++)
-            {
-                for(int k = 0; k<posHuruf.Count; k++)
+                for( int i = 0; i< pilihanList.Count; i++)
                 {
-                    if(kotakList[j].GetComponent<DataHuruf>().id == posHuruf[k])
-                    {
-                        if(q.Soal[i].orientasi == 0)
-                        {
-                            kotakList[j].GetComponent<DataHuruf>().rootSoal1 = q.Soal[i].ID + 1;
-                            kotakList[j].GetComponent<DataHuruf>().answerWord1 = q.Soal[i].jawaban;
-                        }
-                        else
-                        {
-                            kotakList[j].GetComponent<DataHuruf>().rootSoal2 = q.Soal[i].ID + 1;
-                            kotakList[j].GetComponent<DataHuruf>().answerWord2 = q.Soal[i].jawaban;
-
-                        }
-                        kotakList[j].GetComponent<DataHuruf>().isUsed = true;
-                    }
-                }          
-            }
-        }
-
-        for(int i = 0; i < kotakList.Count; i++)
-        {
-            if(kotakList[i].GetComponent<DataHuruf>().isUsed == false)
-            {
-                kotakList[i].SetActive(false);
+                    pilihanList[i].GetComponent<DataKotakHuruf>().textPilihan.text = wordsArray[i].ToString();
+                }       
             }
         }
     }
 
     public void SetQuestion()
     {
-        gameStatus = GameStatus.Playing;
+        questionText.text = q.Soal[0].pertanyaan;
+        questionImage.sprite = q.Soal[0].gambar;
+        
+        string answerWord =TTSManager.instance.q.Soal[0].jawaban;
 
-        questionText.text = q.Soal[dataHuruf.rootSoal1].pertanyaan;
-        questionImage.sprite = q.Soal[dataHuruf.rootSoal1].gambar;
-
-        selectedWordsIndex.Clear();
-        Array.Clear(wordsArray, 0, wordsArray.Length);
+        Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
 
         //add the correct char to the wordsArray
-       // for (int i = 0; i < _answerWord1.Length; i++)
-       // {
-         //   wordsArray[i] = char.ToUpper(_answerWord1[i]);
-        //}
+        for (int i = 0; i < answerWord.Length; i++)
+        {
+            TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
+        }
 
         //add the dummy char to wordsArray
-        for (int j = _answerWord1.Length; j < wordsArray.Length; j++)
+        for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
         {
-            wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
+            TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
         }
-        wordsArray = ShuffleList.ShuffleListItems<char>(wordsArray.ToList()).ToArray();
+            
+        TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
     }
-
+    
     public void Timer()
     {
         int Menit = Mathf.FloorToInt(Waktu/60);
@@ -153,13 +166,10 @@ public class TTSManager : MonoBehaviour
         TextTimer.text = Menit.ToString("00")+":"+ Detik.ToString("00");
     }
 
-    public void SelectedOption()
-    {
-        
-    }
 }
 public enum GameStatus
 {
    Playing,
-   Pause
+   Pause,
+   Next
 }

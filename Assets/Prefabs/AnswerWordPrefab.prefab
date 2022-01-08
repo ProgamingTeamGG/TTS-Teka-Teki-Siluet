@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5499376494072247439}
   - component: {fileID: 6326047110817132869}
   - component: {fileID: 6420488664958604428}
-  - component: {fileID: 2042557172796932226}
+  - component: {fileID: 7186237229556105775}
   m_Layer: 5
   m_Name: AnswerWordPrefab
   m_TagString: Untagged
@@ -57,17 +57,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3247767475415663944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5d9a882297ebf447a0271e8be9b4374, type: 3}
+  m_Script: {fileID: 11500000, guid: c8f40f04cad67d44d88c119a070736cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textDiKotak: {fileID: 1570217893228125177}
-  txtDiKotak: 
+  textPilihan: {fileID: 0}
   isUsed: 0
-  isOnClick: 1
+  isHorizontal: 0
+  isSelected: 0
   rootSoal1: 0
   rootSoal2: 0
+  answerWord0: 
   answerWord1: 
-  answerWord2: 
+  hurufJawaban: 0
+  inputJawaban: 0
   id: {x: 0, y: 0}
 --- !u!114 &6420488664958604428
 MonoBehaviour:
@@ -98,7 +101,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &2042557172796932226
+--- !u!114 &7186237229556105775
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +122,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0, g: 0.9510727, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.94820046, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -139,7 +142,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6326047110817132869}
-        m_MethodName: Soal1
+        m_MethodName: GantiSoal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -150,44 +153,11 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6326047110817132869}
-        m_MethodName: Soal2
+        m_MethodName: Coba
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6326047110817132869}
-        m_MethodName: Soal3
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6326047110817132869}
-        m_MethodName: Soal4
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 3247767475415663944}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
