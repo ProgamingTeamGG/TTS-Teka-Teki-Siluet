@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6d7b491bb9fd148a64e282546ce5b0, type: 3}
   m_Name: Level 2 TTS
   m_EditorClassIdentifier: 
-  height: 0
-  width: 0
+  height: 5
+  width: 5
   startPos: {x: 0, y: 0, z: 0}
-  spacing: 0
-  scaleKotak: 0
-  Soal: []
+  spacing: 1
+  scaleKotak: 1
+  Soal:
+  - ID: 0
+    pertanyaan: A
+    jawaban: A
+    gambar: {fileID: 21300000, guid: 13b7675b4a3f4f449a3e030f151c6130, type: 3}
+    posHuruf:
+    - {x: 0, y: 0}
+    orientasi: 0
