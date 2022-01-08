@@ -5,19 +5,16 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
   public static bool isGamePaused =false;
-
   [SerializeField] GameObject pauseMenu;
     public void click()
     {
         if (isGamePaused)
         {
             ResumeGame();
-           
         }
         else
         {
             PauseGame();
-        
         }
     }
 
@@ -33,12 +30,10 @@ public class Pause : MonoBehaviour
         Time.timeScale=0f;
         isGamePaused = true;
     }
-
     public void MainMenu ()
    {
        SceneManager.LoadScene(1);
        Time.timeScale=1f;
-     
    }
 
    public void restart()
@@ -46,6 +41,4 @@ public class Pause : MonoBehaviour
        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale=1f;
    }
-
-
 }
