@@ -101,12 +101,7 @@ public class DataKotakHuruf : MonoBehaviour
     }
 
     public void IsiJawaban()
-    {   
-        /*for(int a=0;a<TTSManager.instance.q.Soal.Count;a++)
-        {
-            rootSoal1
-            continue;
-        }*/
+    {
         for(int i = 0; i < TTSManager.instance.q.Soal[rootSoal1].posHuruf.Count;i++)
         {
             TTSManager.instance.kotakList[i].GetComponent<DataKotakHuruf>().indexDiSoal = i;

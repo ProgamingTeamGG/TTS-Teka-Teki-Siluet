@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 811, y: 498}
   m_MaxSize: {x: 22006, y: 14048}
   vertical: 0
-  controlID: 711
+  controlID: 38
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_MinSize: {x: 534, y: 498}
   m_MaxSize: {x: 18004, y: 14048}
   vertical: 1
-  controlID: 684
+  controlID: 39
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 224}
   m_MaxSize: {x: 8002, y: 4024}
   vertical: 0
-  controlID: 609
+  controlID: 40
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -174,8 +174,8 @@ MonoBehaviour:
     y: 0
     width: 817
     height: 354
-  m_MinSize: {x: 202, y: 224}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 7}
   m_Panes:
   - {fileID: 6}
@@ -461,7 +461,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2099fcff56e8fcff7a4fffff60fbffffd4fbffff062f0000162f00002e2f00004a2f0000742f00002a8800003a88000052880000ae880000
+      m_ExpandedIDs: 60fbffffd4fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -628,7 +628,7 @@ MonoBehaviour:
   m_MinSize: {x: 534, y: 274}
   m_MaxSize: {x: 18004, y: 10024}
   vertical: 0
-  controlID: 685
+  controlID: 111
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -704,8 +704,8 @@ MonoBehaviour:
     y: 0
     width: 369
     height: 281
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 104, y: 124}
+  m_MaxSize: {x: 4004, y: 4024}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -756,8 +756,8 @@ MonoBehaviour:
     y: 0
     width: 237
     height: 281
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 234, y: 274}
+  m_MaxSize: {x: 10004, y: 10024}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -801,19 +801,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Script
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\Documents\Data Bagas\KODINGAN\Unity\New folder
+  m_LastProjectPath: D:\Documents\Data Bagas\KODINGAN\Unity\GitHub\TTS-Teka-Teki-Siluet
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: ae2c0000
     m_LastClickedID: 11438
-    m_ExpandedIDs: ffffffff00000000e22600003c2800004a2800000c2900002e290000dc2900000e2a00002e2a00005e2a0000a62a0000102d0000202d0000242d00003a2d0000e82e0000ea2e0000
+    m_ExpandedIDs: 00000000e22600003c2800004a2800000c2900002e290000dc2900000e2a00002e2a00005e2a0000a62a0000102d0000202d0000242d00003a2d0000e82e0000ea2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -838,9 +838,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 301}
-    m_SelectedIDs: d82a0000
-    m_LastClickedID: 10968
+    scrollPos: {x: 0, y: 421}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
     m_ExpandedIDs: ffffffff00000000e22600003c2800004a2800000c2900002e290000dc2900000e2a00002e2a00005e2a0000a62a0000102d0000202d0000242d00003a2d0000e82e0000ea2e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -866,8 +866,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: d82a0000
-    m_LastClickedInstanceID: 10968
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000e8320000ac3000009430000068430000a22700004c30000000000000d0c6ffff
     m_RenameOverlay:
@@ -915,8 +915,8 @@ MonoBehaviour:
     y: 0
     width: 310
     height: 635
-  m_MinSize: {x: 277, y: 74}
-  m_MaxSize: {x: 4002, y: 4024}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
