@@ -86,6 +86,7 @@
      <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
      <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
+     <Compile Include="Assets\PlayerPrefsExtra\PlayerPrefsExtra.cs" />
      <Compile Include="Assets\Script\AcakHuruf.cs" />
      <Compile Include="Assets\Script\AudioScript.cs" />
      <Compile Include="Assets\Script\DataKotakHuruf.cs" />

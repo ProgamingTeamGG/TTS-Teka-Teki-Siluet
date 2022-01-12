@@ -12,8 +12,8 @@ public class TTSManager : MonoBehaviour
     public QuizDataScriptable q;
     public DataKotakHuruf dataHuruf;
     public Text questionText;
+    public Text hasilText;
     public Image questionImage;
-    public GameStatus gameStatus = GameStatus.Playing;
     public GameObject kotak;
     public GameObject pilihan;
     public Transform wadahTTS;
@@ -24,10 +24,11 @@ public class TTSManager : MonoBehaviour
     public float Waktu; 
 
     float s;
-    private int currentAnswerIndex = 0;
 
+    public int jumlahHurufBenar = 0;
+    public int jumlahSoalBenar = 0;
     public char[] wordsArray = new char[20];               //array which store char of each options
-
+    
     private void Awake()
     {
         instance = this;
@@ -37,7 +38,7 @@ public class TTSManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetQuestion();
+        //SetQuestion();
         MakeGridBoard();
     }
 
@@ -95,13 +96,23 @@ public class TTSManager : MonoBehaviour
                             kotakList[j].GetComponent<DataKotakHuruf>().rootSoal2 = q.Soal[i].ID + 1;
                             kotakList[j].GetComponent<DataKotakHuruf>().answerWord1 = q.Soal[i].jawaban;
                             kotakList[j].GetComponent<DataKotakHuruf>().isHorizontal = false;
+                        }
+
+                        kotakList[j].GetComponent<DataKotakHuruf>().isUsed = true;
+                        kotakList[j].GetComponent<DataKotakHuruf>().indexDiSoal = j;
+                        kotakList[j].GetComponent<DataKotakHuruf>().hurufJawaban = _soal[k];
+
+                        if(kotakList[j].GetComponent<DataKotakHuruf>().id == posHuruf[0])
+                        {
+                            kotakList[j].GetComponent<DataKotakHuruf>().hurufPertama = true;
+                        }
+                        else 
+                        {
+                            kotakList[j].GetComponent<DataKotakHuruf>().hurufPertama = false;
 
                         }
-                        kotakList[j].GetComponent<DataKotakHuruf>().isUsed = true;
-
-                        kotakList[j].GetComponent<DataKotakHuruf>().hurufJawaban = _soal[k];
                     }
-                }          
+                }
             }
         }
 
@@ -111,6 +122,7 @@ public class TTSManager : MonoBehaviour
             if(kotakList[i].GetComponent<DataKotakHuruf>().isUsed == false)
             {
                 kotakList[i].SetActive(false);
+                kotakList[i].GetComponent<DataKotakHuruf>().hurufPertama = false;
             }
         }              
 
@@ -134,30 +146,30 @@ public class TTSManager : MonoBehaviour
             }
         }
     }
-
-    public void SetQuestion()
+    
+    /*public void SetQuestion()
     {
         questionText.text = q.Soal[0].pertanyaan;
         questionImage.sprite = q.Soal[0].gambar;
         
-        string answerWord =TTSManager.instance.q.Soal[0].jawaban;
+        string answerWord = q.Soal[0].jawaban;
 
-        Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
+        Array.Clear(wordsArray, 0, wordsArray.Length);  //clear the array
 
         //add the correct char to the wordsArray
         for (int i = 0; i < answerWord.Length; i++)
         {
-            TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
+            wordsArray[i] = char.ToUpper(answerWord[i]);
         }
 
         //add the dummy char to wordsArray
-        for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
+        for (int j = answerWord.Length; j < wordsArray.Length; j++)
         {
-            TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
+            wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
         }
             
-        TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
-    }
+        wordsArray = AcakHuruf.AcakHurufItems<char>(wordsArray.ToList()).ToArray();
+    }*/
     
     public void Timer()
     {
@@ -166,10 +178,4 @@ public class TTSManager : MonoBehaviour
         TextTimer.text = Menit.ToString("00")+":"+ Detik.ToString("00");
     }
 
-}
-public enum GameStatus
-{
-   Playing,
-   Pause,
-   Next
 }

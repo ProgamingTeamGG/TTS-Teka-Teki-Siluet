@@ -12,16 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf6d7b491bb9fd148a64e282546ce5b0, type: 3}
   m_Name: Level 2 TTS
   m_EditorClassIdentifier: 
-  height: 5
-  width: 5
-  startPos: {x: 0, y: 0, z: 0}
-  spacing: 1
-  scaleKotak: 1
+  height: 10
+  width: 17
+  startPos: {x: -0.75, y: 2.8, z: 0}
+  spacing: 0.7
+  scaleKotak: 1.25
   Soal:
   - ID: 0
-    pertanyaan: A
-    jawaban: A
-    gambar: {fileID: 21300000, guid: 13b7675b4a3f4f449a3e030f151c6130, type: 3}
+    pertanyaan: Hewan ini pemakan daging dan penghasil susu
+    jawaban: GAPI
+    gambar: {fileID: 21300000, guid: d0ef3b33ac191324c8733c8d13705bf4, type: 3}
+    gambarBetul: {fileID: 21300000, guid: b4acd9af592914343821fe19b2c79f35, type: 3}
     posHuruf:
-    - {x: 0, y: 0}
+    - {x: 1, y: 5}
+    - {x: 2, y: 5}
+    - {x: 3, y: 5}
+    - {x: 4, y: 5}
     orientasi: 0
+  - ID: 1
+    pertanyaan: Hewan ini berbadan besar dan hidup di hutan.
+    jawaban: BEKUDANIL
+    gambar: {fileID: 21300000, guid: 13b7675b4a3f4f449a3e030f151c6130, type: 3}
+    gambarBetul: {fileID: 21300000, guid: a523a99d12db10743a7d85c88c3cffb7, type: 3}
+    posHuruf:
+    - {x: 3, y: 1}
+    - {x: 4, y: 1}
+    - {x: 5, y: 1}
+    - {x: 6, y: 1}
+    - {x: 7, y: 1}
+    - {x: 8, y: 1}
+    - {x: 9, y: 1}
+    - {x: 10, y: 1}
+    - {x: 11, y: 1}
+    orientasi: 0
+  - ID: 2
+    pertanyaan: Hewan ini bergelantung diatas pohon. pemakan daging
+    jawaban: ORANGSINGA
+    gambar: {fileID: 21300000, guid: e1540918251f3564696ca3f2be036f5c, type: 3}
+    gambarBetul: {fileID: 21300000, guid: 532b7504d04d2ca468753adb1c0d3e3e, type: 3}
+    posHuruf:
+    - {x: 0, y: 3}
+    - {x: 1, y: 3}
+    - {x: 2, y: 3}
+    - {x: 3, y: 3}
+    - {x: 4, y: 3}
+    - {x: 5, y: 3}
+    - {x: 6, y: 3}
+    - {x: 7, y: 3}
+    - {x: 8, y: 3}
+    - {x: 9, y: 3}
+    orientasi: 0
+  - ID: 3
+    pertanyaan: Hewan ini memakan ikan sebagai makananya.
+    jawaban: PENGUIN
+    gambar: {fileID: 21300000, guid: 2cd7ad568d56e2e449ca4165046f198e, type: 3}
+    gambarBetul: {fileID: 21300000, guid: 7a97d9ae52ef79046a19efa8a2535e2d, type: 3}
+    posHuruf:
+    - {x: 4, y: 0}
+    - {x: 4, y: 1}
+    - {x: 4, y: 2}
+    - {x: 4, y: 3}
+    - {x: 4, y: 4}
+    - {x: 4, y: 5}
+    - {x: 4, y: 6}
+    orientasi: 1
