@@ -46,6 +46,7 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isHorizontal = true;
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isUsed = true;
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufPertama = false;
+                    TTSManager.instance.pilihanList[i].SetActive(true);
                 }
             }
 
@@ -65,10 +66,12 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().answerWord1 = answerWord1;
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().indexPilihan = indexDiSoal;
                     TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isHorizontal = false;
+                    TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isUsed = true;
+                    TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufPertama = false;
+                    TTSManager.instance.pilihanList[i].SetActive(true);
                 }
             }
             
-            gameObject.SetActive(true);
             TTSManager.instance.hasilText.text = "";
 
         }
@@ -151,6 +154,7 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = textPilihan.text;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
 
+                    gameObject.SetActive(false);
                     JawabanBenar();
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
@@ -159,7 +163,6 @@ public class DataKotakHuruf : MonoBehaviour
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
                         continue;
                     }
-                    gameObject.SetActive(false);
                 }
 
                 if(!isHorizontal)
@@ -167,6 +170,7 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = textPilihan.text;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
 
+                    gameObject.SetActive(false);
                     JawabanBenar();
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
@@ -175,7 +179,6 @@ public class DataKotakHuruf : MonoBehaviour
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
                         continue;
                     }
-                    gameObject.SetActive(false);
                 } 
             }
         }
@@ -235,6 +238,7 @@ public class DataKotakHuruf : MonoBehaviour
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan --;
+                        TTSManager.instance.pilihanList[j].SetActive(true);
                     }
                     return;
                     TTSManager.instance.jumlahHurufBenar -= 1;
@@ -294,6 +298,7 @@ public class DataKotakHuruf : MonoBehaviour
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan --;
+                        TTSManager.instance.pilihanList[j].SetActive(true);
                     }
                     TTSManager.instance.jumlahHurufBenar -= 1;
                 }
