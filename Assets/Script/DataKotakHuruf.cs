@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DataKotakHuruf : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class DataKotakHuruf : MonoBehaviour
                     AcakPilihan();
 
                     TTSManager.instance.jumlahHurufBenar = 0;
+                    
+                    TTSManager.instance.hint.SetActive(true);
+                    TTSManager.instance.hint.GetComponent<DataKotakHuruf>().isUsed = true;
 
                     for( int i = 0; i< TTSManager.instance.pilihanList.Count; i++)
                     {
@@ -81,7 +85,43 @@ public class DataKotakHuruf : MonoBehaviour
             }
             else
             {
-                Debug.Log("Gabisa cuk");
+                if(isHorizontal) 
+                {
+                    TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal1 - 1].gambar;
+                    TTSManager.instance.questionText.text = TTSManager.instance.q.Soal[rootSoal1 - 1].pertanyaan;
+
+                    for( int i = 0; i< TTSManager.instance.pilihanList.Count; i++)
+                    {
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().indexOption = i;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufJawaban = hurufJawaban;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().rootSoal1 = rootSoal1;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().answerWord0 = answerWord0;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().indexPilihan = indexDiSoal;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isHorizontal = true;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isUsed = true;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufPertama = false;
+                        TTSManager.instance.pilihanList[i].SetActive(false);
+                    }
+                }
+
+                if(!isHorizontal) 
+                {
+                    TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal2 - 1].gambar;
+                    TTSManager.instance.questionText.text = TTSManager.instance.q.Soal[rootSoal2 - 1].pertanyaan;
+
+                    for( int i = 0; i< TTSManager.instance.pilihanList.Count; i++)
+                    {
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().indexOption = i;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufJawaban = hurufJawaban;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().rootSoal2 = rootSoal2;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().answerWord1 = answerWord1;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().indexPilihan = indexDiSoal;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isHorizontal = false;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().isUsed = true;
+                        TTSManager.instance.pilihanList[i].GetComponent<DataKotakHuruf>().hurufPertama = false;
+                        TTSManager.instance.pilihanList[i].SetActive(false);
+                    }
+                }
             }
 
         }
@@ -89,13 +129,18 @@ public class DataKotakHuruf : MonoBehaviour
         {
             if(isHorizontal)
             {
-                TTSManager.instance.hasilText.text = "Jawaban Benar";
+                TTSManager.instance.hasilText.color = Color.green;
                 TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal1 - 1].gambarBetul;
             }
             if(!isHorizontal)
             {
-                TTSManager.instance.hasilText.text = "Jawaban Benar";
+                TTSManager.instance.hasilText.color = Color.green;
                 TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal2 - 1].gambarBetul;
+            }
+
+            for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
+            {
+                TTSManager.instance.pilihanList[j].SetActive(false);
             }
         }
     }
@@ -104,46 +149,46 @@ public class DataKotakHuruf : MonoBehaviour
 
     void AcakPilihan()
     {
-            if(isHorizontal) 
+        if(isHorizontal) 
+        {
+            string answerWord = answerWord0;
+
+            Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
+
+            //add the correct char to the wordsArray
+            for (int i = 0; i < answerWord.Length; i++)
             {
-                string answerWord = answerWord0;
-
-                Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
-
-                //add the correct char to the wordsArray
-                for (int i = 0; i < answerWord.Length; i++)
-                {
-                    TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
-                }
-
-                //add the dummy char to wordsArray
-                for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
-                {
-                    TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
-                }
-                
-                TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
+                TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
             }
 
-            if(!isHorizontal) 
+            //add the dummy char to wordsArray
+            for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
             {
-                string answerWord = answerWord1;
+                TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
+            }
+                
+            TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
+        }
 
-                Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
+        if(!isHorizontal) 
+        {
+            string answerWord = answerWord1;
 
-                //add the correct char to the wordsArray
-                for (int i = 0; i < answerWord.Length; i++)
-                {
-                    TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
-                }
+            Array.Clear(TTSManager.instance.wordsArray, 0, TTSManager.instance.wordsArray.Length);  //clear the array
 
-                //add the dummy char to wordsArray
-                for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
-                {
-                    TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
-                }
+            //add the correct char to the wordsArray
+            for (int i = 0; i < answerWord.Length; i++)
+            {
+                TTSManager.instance.wordsArray[i] = char.ToUpper(answerWord[i]);
+            }
 
-                TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
+            //add the dummy char to wordsArray
+            for (int j = answerWord.Length; j < TTSManager.instance.wordsArray.Length; j++)
+            {
+                TTSManager.instance.wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
+            }
+
+            TTSManager.instance.wordsArray = AcakHuruf.AcakHurufItems<char>(TTSManager.instance.wordsArray.ToList()).ToArray();
             }
     }
 
@@ -198,6 +243,7 @@ public class DataKotakHuruf : MonoBehaviour
                 {
                     Debug.Log("YA");
                     TTSManager.instance.hasilText.text = "Nice";
+                    TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.black;
                     TTSManager.instance.jumlahHurufBenar++;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = true;
@@ -206,6 +252,7 @@ public class DataKotakHuruf : MonoBehaviour
                     if(TTSManager.instance.jumlahHurufBenar >= answerWord0.Length / 2)
                     {
                         TTSManager.instance.hasilText.text = "Dikit Lagi";
+                        TTSManager.instance.delayCounter += 3f;
                         TTSManager.instance.hasilText.color = Color.black;
                     }
 
@@ -213,7 +260,9 @@ public class DataKotakHuruf : MonoBehaviour
                     {
                         TTSManager.instance.jumlahSoalBenar++;
                         TTSManager.instance.hasilText.text = "Jawaban Benar";
+                        TTSManager.instance.delayCounter += 3f;
                         TTSManager.instance.hasilText.color = Color.green;
+                        TTSManager.instance.scorePoint += 100;
                         TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal1 - 1].gambarBetul;
 
                         for(int j = 0; j < TTSManager.instance.kotakList.Count; j++)
@@ -237,6 +286,7 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = false;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = "_";
                     TTSManager.instance.hasilText.text = "Jawaban Salah";
+                    TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.red;
                     TTSManager.instance.pilihanList[indexOption].SetActive(true);
                     Debug.Log("salah");
@@ -258,6 +308,7 @@ public class DataKotakHuruf : MonoBehaviour
                 {
                     Debug.Log("YA");
                     TTSManager.instance.hasilText.text = "Nice";
+                    TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.black;
                     TTSManager.instance.jumlahHurufBenar++;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = true;
@@ -266,6 +317,7 @@ public class DataKotakHuruf : MonoBehaviour
                     if(TTSManager.instance.jumlahHurufBenar >= answerWord1.Length / 2)
                     {
                         TTSManager.instance.hasilText.text = "Dikit Lagi";
+                        TTSManager.instance.delayCounter += 3f;
                         TTSManager.instance.hasilText.color = Color.black;
                     }
                     
@@ -274,6 +326,8 @@ public class DataKotakHuruf : MonoBehaviour
                         TTSManager.instance.jumlahSoalBenar++;
                         TTSManager.instance.hasilText.color = Color.green;
                         TTSManager.instance.hasilText.text = "Jawaban Benar";
+                        TTSManager.instance.delayCounter += 3f;
+                        TTSManager.instance.scorePoint += 100;
                         TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal2 - 1].gambarBetul;
 
                         for(int j = 0; j < TTSManager.instance.kotakList.Count; j++)
@@ -297,6 +351,7 @@ public class DataKotakHuruf : MonoBehaviour
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = false;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = "_";
                     TTSManager.instance.hasilText.text = "Jawaban Salah";
+                    TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.red;
                     Debug.Log("salah");
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
@@ -310,5 +365,32 @@ public class DataKotakHuruf : MonoBehaviour
             }
         }
         
+    }
+    
+    public void Hint()
+    {
+        if(isUsed)
+        {
+            if(TTSManager.instance.jumlahBantuan >= 5) return;
+            TTSManager.instance.jumlahBantuan ++; 
+            TTSManager.instance.hasilText.text = "Eaa bantuan, jangan dihabisin sisa " + (5 - TTSManager.instance.jumlahBantuan);
+            TTSManager.instance.hasilText.color = Color.black;
+            TTSManager.instance.delayCounter += 3f;
+
+            if(TTSManager.instance.jumlahBantuan == 5)
+            {
+                TTSManager.instance.hasilText.text = "Kan habis bantuannya";
+                TTSManager.instance.delayCounter += 3f;
+                gameObject.SetActive(false);
+            }
+
+            for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
+            {
+                int index = TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan;
+                TTSManager.instance.bantuanText.text = TTSManager.instance.kotakList[index].GetComponent<DataKotakHuruf>().hurufJawaban.ToString(); 
+                return;
+
+            }
+        }
     }
 }

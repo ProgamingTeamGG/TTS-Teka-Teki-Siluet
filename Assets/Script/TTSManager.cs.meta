@@ -3,7 +3,21 @@ guid: 5b7a5b1afed434b429a43d8c7da22e0f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - q: {instanceID: 0}
+  - dataHuruf: {instanceID: 0}
+  - questionText: {instanceID: 0}
+  - hasilText: {instanceID: 0}
+  - scoreText: {instanceID: 0}
+  - bantuanText: {instanceID: 0}
+  - questionImage: {instanceID: 0}
+  - kotak: {instanceID: 0}
+  - pilihan: {instanceID: 0}
+  - titik: {instanceID: 0}
+  - hint: {instanceID: 0}
+  - wadahTTS: {instanceID: 0}
+  - wadahPilihan: {instanceID: 0}
+  - TextTimer: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

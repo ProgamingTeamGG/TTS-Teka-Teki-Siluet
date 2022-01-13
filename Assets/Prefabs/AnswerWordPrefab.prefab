@@ -64,15 +64,20 @@ MonoBehaviour:
   textPilihan: {fileID: 0}
   isUsed: 0
   isHorizontal: 0
+  hurufPertama: 0
+  hurufBenar: 0
+  soalBenar: 0
   rootSoal1: 0
   rootSoal2: 0
   indexDiSoal: 0
   indexPilihan: 0
+  indexOption: 0
   answerWord0: 
   answerWord1: 
   hurufJawaban: 0
   inputJawaban: 0
   id: {x: 0, y: 0}
+  delayDuration: 0
 --- !u!114 &6420488664958604428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +232,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
-    m_Alignment: 7
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1

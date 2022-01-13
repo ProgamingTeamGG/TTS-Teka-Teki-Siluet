@@ -15,6 +15,7 @@ public class QuizDataScriptable : ScriptableObject
     public int height;
     public int width;
     public Vector3 startPos;
+    public Vector2Int posDot;
     public float spacing;
     public float scaleKotak;
 

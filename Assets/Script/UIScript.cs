@@ -6,57 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class UIScript : MonoBehaviour
 {
-   
-      public void MainMenu()
+   public void GantiScene(string namaScene)
    {
-       SceneManager.LoadScene(0);
+       SceneManager.LoadScene(namaScene);
    }
-   public void play ()
-   {
-       SceneManager.LoadScene(1);
-   }
-   public void level1_1 ()
-   {
-       SceneManager.LoadScene(2);
-   }
-   public void level1_2 ()
-   {
-       SceneManager.LoadScene(3);
-   }
-   public void level1_3 ()
-   {
-       SceneManager.LoadScene(4);
-   }
-   public void level1_4 ()
-   {
-       SceneManager.LoadScene(5);
-   }
-   public void level1_5()
-   {
-       SceneManager.LoadScene(6);
-   }
-   public void level2_1()
-   {
-       SceneManager.LoadScene(7);
-   }
-   public void level2_2()
-   {
-       SceneManager.LoadScene(8);
-   }
-   public void level2_3()
-   {
-       SceneManager.LoadScene(9);
-   }
-   public void level2_4()
-   {
-       SceneManager.LoadScene(10);
-   }
-   public void level2_5()
-   {
-       SceneManager.LoadScene(11);
-   }
-     
-
 
    public void Quit()
    {

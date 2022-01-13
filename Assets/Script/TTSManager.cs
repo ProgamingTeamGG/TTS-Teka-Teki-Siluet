@@ -13,9 +13,13 @@ public class TTSManager : MonoBehaviour
     public DataKotakHuruf dataHuruf;
     public Text questionText;
     public Text hasilText;
+    public Text scoreText;
+    public Text bantuanText;
     public Image questionImage;
     public GameObject kotak;
     public GameObject pilihan;
+    public GameObject titik;
+    public GameObject hint;
     public Transform wadahTTS;
     public Transform wadahPilihan;
     public List<GameObject> kotakList;
@@ -24,21 +28,30 @@ public class TTSManager : MonoBehaviour
     public float Waktu; 
 
     float s;
+    public float delayCounter;
 
+    public int scorePoint;
+    public int jumlahBantuan = 0;
     public int jumlahHurufBenar = 0;
     public int jumlahSoalBenar = 0;
     public char[] wordsArray = new char[20];               //array which store char of each options
     
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else if(this != instance) {
+            Destroy(this.gameObject);
+        }
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //SetQuestion();
+        SetQuestion();
         MakeGridBoard();
     }
 
@@ -51,6 +64,16 @@ public class TTSManager : MonoBehaviour
         {
             Waktu++;
             s = 0;
+        }
+        
+        if(delayCounter >= 0)
+        {
+            delayCounter -= Time.deltaTime;
+            if(delayCounter < 0)
+            {
+                hasilText.text = "";
+                bantuanText.text = "?";
+            }
         }
     }
 
@@ -104,7 +127,7 @@ public class TTSManager : MonoBehaviour
 
                         if(kotakList[j].GetComponent<DataKotakHuruf>().id == posHuruf[0])
                         {
-                            kotakList[j].GetComponent<DataKotakHuruf>().hurufPertama = true;
+                            kotakList[j].GetComponent<DataKotakHuruf>().hurufPertama = true;                           
                         }
                         else 
                         {
@@ -141,35 +164,19 @@ public class TTSManager : MonoBehaviour
 
                 for( int i = 0; i< pilihanList.Count; i++)
                 {
-                    pilihanList[i].GetComponent<DataKotakHuruf>().textPilihan.text = wordsArray[i].ToString();
+                    pilihanList[i].SetActive(false);
                 }       
             }
         }
     }
     
-    /*public void SetQuestion()
+    public void SetQuestion()
     {
         questionText.text = q.Soal[0].pertanyaan;
         questionImage.sprite = q.Soal[0].gambar;
         
         string answerWord = q.Soal[0].jawaban;
-
-        Array.Clear(wordsArray, 0, wordsArray.Length);  //clear the array
-
-        //add the correct char to the wordsArray
-        for (int i = 0; i < answerWord.Length; i++)
-        {
-            wordsArray[i] = char.ToUpper(answerWord[i]);
-        }
-
-        //add the dummy char to wordsArray
-        for (int j = answerWord.Length; j < wordsArray.Length; j++)
-        {
-            wordsArray[j] = (char)UnityEngine.Random.Range(65, 90);
-        }
-            
-        wordsArray = AcakHuruf.AcakHurufItems<char>(wordsArray.ToList()).ToArray();
-    }*/
+    }
     
     public void Timer()
     {
@@ -177,5 +184,4 @@ public class TTSManager : MonoBehaviour
         int Detik = Mathf.FloorToInt(Waktu%60);
         TextTimer.text = Menit.ToString("00")+":"+ Detik.ToString("00");
     }
-
 }
