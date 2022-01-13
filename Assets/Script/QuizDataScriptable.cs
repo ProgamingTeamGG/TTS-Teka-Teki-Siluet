@@ -31,6 +31,7 @@ public class QuestionData
     public string pertanyaan;
     public string jawaban;
     public Sprite gambar;
+    public Sprite gambarBetul;
     public List<Vector2Int> posHuruf;
     public Orientasi orientasi;
 }
