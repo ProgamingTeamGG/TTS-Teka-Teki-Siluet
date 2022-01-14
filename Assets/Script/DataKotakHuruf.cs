@@ -15,6 +15,8 @@ public class DataKotakHuruf : MonoBehaviour
     public bool hurufPertama = false;
     public bool hurufBenar = false;
     public bool soalBenar = false;
+    private bool datarBenar = false;
+    private bool turunBenar = false;
     public int rootSoal1;
     public int rootSoal2;
     public int indexDiSoal;
@@ -120,19 +122,24 @@ public class DataKotakHuruf : MonoBehaviour
                     }
                 }
             }
-
         }
         else
         {
             if(isHorizontal)
             {
-                TTSManager.instance.hasilText.color = Color.green;
-                TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal1 - 1].gambarBetul;
+                if(datarBenar)
+                {
+                    TTSManager.instance.hasilText.color = Color.green;
+                    TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal1 - 1].gambarBetul;
+                }
             }
             if(!isHorizontal)
             {
-                TTSManager.instance.hasilText.color = Color.green;
-                TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal2 - 1].gambarBetul;
+                if (turunBenar)
+                {
+                    TTSManager.instance.hasilText.color = Color.green;
+                    TTSManager.instance.questionImage.sprite = TTSManager.instance.q.Soal[rootSoal2 - 1].gambarBetul;
+                }
             }
 
             for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
@@ -275,6 +282,7 @@ public class DataKotakHuruf : MonoBehaviour
                             if(TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().rootSoal1 == rootSoal1)
                             {
                                 TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().soalBenar = true;
+                                TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().datarBenar = true;
                             }                   
                         }
 
@@ -339,6 +347,7 @@ public class DataKotakHuruf : MonoBehaviour
                             if(TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().rootSoal2 == rootSoal2)
                             {
                                 TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().soalBenar = true;
+                                TTSManager.instance.kotakList[j].GetComponent<DataKotakHuruf>().turunBenar = true;
                             }                   
                         }
 

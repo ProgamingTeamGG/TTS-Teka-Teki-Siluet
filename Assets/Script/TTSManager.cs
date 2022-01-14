@@ -58,6 +58,8 @@ public class TTSManager : MonoBehaviour
     {
         SetQuestion();
         MakeGridBoard();
+
+        Time.timeScale = 1f;
     }
 
     void Update()
