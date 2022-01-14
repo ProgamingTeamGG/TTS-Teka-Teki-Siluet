@@ -39,9 +39,6 @@ public class DataKotakHuruf : MonoBehaviour
                     AcakPilihan();
 
                     TTSManager.instance.jumlahHurufBenar = 0;
-                    
-                    TTSManager.instance.hint.SetActive(true);
-                    TTSManager.instance.hint.GetComponent<DataKotakHuruf>().isUsed = true;
 
                     for( int i = 0; i< TTSManager.instance.pilihanList.Count; i++)
                     {
@@ -143,6 +140,13 @@ public class DataKotakHuruf : MonoBehaviour
                 TTSManager.instance.pilihanList[j].SetActive(false);
             }
         }
+
+        if(TTSManager.instance.jumlahBantuan != 5)
+        {
+            TTSManager.instance.hint.gameObject.SetActive(true);
+            TTSManager.instance.hint.interactable = true;
+            TTSManager.instance.hint.GetComponent<DataKotakHuruf>().isUsed = true;
+        }
     }
 
     
@@ -202,6 +206,8 @@ public class DataKotakHuruf : MonoBehaviour
                 {
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = textPilihan.text;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
+                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.color = Color.white;
+
 
                     gameObject.SetActive(false);
                     JawabanBenar();
@@ -218,6 +224,7 @@ public class DataKotakHuruf : MonoBehaviour
                 {
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = textPilihan.text;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban = textPilihan.text;
+                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.color = Color.white;
 
                     gameObject.SetActive(false);
                     JawabanBenar();
@@ -241,13 +248,11 @@ public class DataKotakHuruf : MonoBehaviour
             {   
                 if(TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban == TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufJawaban.ToString())
                 {
-                    Debug.Log("YA");
                     TTSManager.instance.hasilText.text = "Nice";
                     TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.black;
                     TTSManager.instance.jumlahHurufBenar++;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = true;
-                    Debug.Log(TTSManager.instance.jumlahHurufBenar);
 
                     if(TTSManager.instance.jumlahHurufBenar >= answerWord0.Length / 2)
                     {
@@ -276,6 +281,8 @@ public class DataKotakHuruf : MonoBehaviour
                         for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                         {
                             TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().isUsed = false;
+                            TTSManager.instance.hint.interactable = false;
+
                         }
                     }
                     
@@ -284,18 +291,17 @@ public class DataKotakHuruf : MonoBehaviour
                 else
                 {
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = false;
-                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = "_";
+                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.color = Color.red;
                     TTSManager.instance.hasilText.text = "Jawaban Salah";
                     TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.red;
                     TTSManager.instance.pilihanList[indexOption].SetActive(true);
-                    Debug.Log("salah");
+
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan --;
                     }
                     return;
-                    TTSManager.instance.jumlahHurufBenar -= 1;
                 }
             }
 
@@ -306,13 +312,11 @@ public class DataKotakHuruf : MonoBehaviour
             {
                 if(TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().inputJawaban == TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufJawaban.ToString())
                 {
-                    Debug.Log("YA");
                     TTSManager.instance.hasilText.text = "Nice";
                     TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.black;
                     TTSManager.instance.jumlahHurufBenar++;
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = true;
-                    Debug.Log(TTSManager.instance.jumlahHurufBenar);
 
                     if(TTSManager.instance.jumlahHurufBenar >= answerWord1.Length / 2)
                     {
@@ -349,11 +353,11 @@ public class DataKotakHuruf : MonoBehaviour
                 else
                 {
                     TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().hurufBenar = false;
-                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.text = "_";
+                    TTSManager.instance.kotakList[indexPilihan].GetComponent<DataKotakHuruf>().textDiKotak.color = Color.red;
                     TTSManager.instance.hasilText.text = "Jawaban Salah";
                     TTSManager.instance.delayCounter += 3f;
                     TTSManager.instance.hasilText.color = Color.red;
-                    Debug.Log("salah");
+
                     for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
                     {
                         TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan --;
@@ -376,20 +380,22 @@ public class DataKotakHuruf : MonoBehaviour
             TTSManager.instance.hasilText.text = "Eaa bantuan, jangan dihabisin sisa " + (5 - TTSManager.instance.jumlahBantuan);
             TTSManager.instance.hasilText.color = Color.black;
             TTSManager.instance.delayCounter += 3f;
+            TTSManager.instance.hint.interactable = false;
 
             if(TTSManager.instance.jumlahBantuan == 5)
             {
                 TTSManager.instance.hasilText.text = "Kan habis bantuannya";
                 TTSManager.instance.delayCounter += 3f;
-                gameObject.SetActive(false);
+                isUsed = false;
             }
 
             for(int j = 0; j < TTSManager.instance.pilihanList.Count;j++)
             {
                 int index = TTSManager.instance.pilihanList[j].GetComponent<DataKotakHuruf>().indexPilihan;
                 TTSManager.instance.bantuanText.text = TTSManager.instance.kotakList[index].GetComponent<DataKotakHuruf>().hurufJawaban.ToString(); 
-                return;
-
+                TTSManager.instance.kotakList[index].GetComponent<DataKotakHuruf>().textDiKotak.text = TTSManager.instance.kotakList[index].GetComponent<DataKotakHuruf>().hurufJawaban.ToString();
+                TTSManager.instance.kotakList[index].GetComponent<DataKotakHuruf>().textDiKotak.color = Color.grey;
+                break;
             }
         }
     }

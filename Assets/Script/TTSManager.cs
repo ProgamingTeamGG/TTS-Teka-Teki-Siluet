@@ -19,12 +19,13 @@ public class TTSManager : MonoBehaviour
     public GameObject kotak;
     public GameObject pilihan;
     public GameObject titik;
-    public GameObject hint;
+    public Button hint;
     public Transform wadahTTS;
     public Transform wadahPilihan;
     public List<GameObject> kotakList;
     public List<GameObject> pilihanList;
-    public Text TextTimer;
+
+    public Text textTimer;
     public float Waktu; 
 
     float s;
@@ -35,6 +36,10 @@ public class TTSManager : MonoBehaviour
     public int jumlahHurufBenar = 0;
     public int jumlahSoalBenar = 0;
     public char[] wordsArray = new char[20];               //array which store char of each options
+
+    [SerializeField] private GameObject menangMenu;
+    [SerializeField] private Text scoreAkhir;
+    [SerializeField] private Text waktuAkhir;
     
     private void Awake()
     {
@@ -57,6 +62,8 @@ public class TTSManager : MonoBehaviour
 
     void Update()
     {
+        Menang();
+
         Timer();
 
         s += Time.deltaTime;
@@ -65,16 +72,32 @@ public class TTSManager : MonoBehaviour
             Waktu++;
             s = 0;
         }
+
+        if(delayCounter > 3)
+        {
+            delayCounter = 3;
+        }
         
-        if(delayCounter >= 0)
+        if(delayCounter > 0)
         {
             delayCounter -= Time.deltaTime;
+
             if(delayCounter < 0)
             {
                 hasilText.text = "";
                 bantuanText.text = "?";
             }
         }
+
+        if(jumlahBantuan == 5)
+        {
+            if(delayCounter < 0)
+            {
+                hint.gameObject.SetActive(false);
+            }
+        }
+
+        scoreText.text = scorePoint.ToString();
     }
 
     public void MakeGridBoard()
@@ -182,6 +205,17 @@ public class TTSManager : MonoBehaviour
     {
         int Menit = Mathf.FloorToInt(Waktu/60);
         int Detik = Mathf.FloorToInt(Waktu%60);
-        TextTimer.text = Menit.ToString("00")+":"+ Detik.ToString("00");
+        textTimer.text = Menit.ToString("00")+":"+ Detik.ToString("00");
+    }
+
+    public void Menang()
+    {
+        if(jumlahSoalBenar == q.Soal.Count)
+        {
+            Time.timeScale = 0f;
+            menangMenu.SetActive(true);
+            waktuAkhir.text = textTimer.text;
+            scoreAkhir.text = scoreText.text;
+        }
     }
 }

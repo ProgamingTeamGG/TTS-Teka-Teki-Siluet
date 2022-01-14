@@ -1,0 +1,2 @@
+D:\Documents\Data Bagas\KODINGAN\Unity\GitHub\TTS-Teka-Teki-Siluet\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+D:\Documents\Data Bagas\KODINGAN\Unity\GitHub\TTS-Teka-Teki-Siluet\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

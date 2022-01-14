@@ -13,9 +13,9 @@ public class GameManager : MonoBehaviour
         
         if (Time.timeScale == 1f)
         {
-             pauseMenu.SetActive(true);
-             Time.timeScale = 0f;
-             AudioSource[] audios = FindObjectsOfType<AudioSource>();
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            AudioSource[] audios = FindObjectsOfType<AudioSource>();
             foreach (AudioSource a in audios)
             {
                 a.Pause();
